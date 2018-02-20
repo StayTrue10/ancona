@@ -1,4 +1,4 @@
-﻿using Registro.mysql;
+using Registro.mysql;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,33 +18,46 @@ namespace Registro
             InitializeComponent();
         }
 
-        private void btnCon_Click(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            conexion.obtenerConexion();
-            MessageBox.Show("exito");
-        }
-
-        private void nombre_Click(object sender, EventArgs e)
-        {
-
+            tbFecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
+            tbHora.Text = DateTime.Now.ToString("hh:mm:ss");
         }
 
         private void btnReg_Click(object sender, EventArgs e)
         {
-            user add = new user
+            if (NameBox.Text.Length == 0 || TicketBox.Text.Length == 0)
             {
-                nombre = NameBox.Text,
-                ticket = TicketBox.Text
-            };
-            int resultado = funciones.agregar(add);
-            if (resultado > 0)
-            {
-                MessageBox.Show("registrado");
+                MessageBox.Show("Faltan campos por rellenar", "Registro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {
-                MessageBox.Show("no regsitrado");
+                user add = new user
+                {
+                    nombre = NameBox.Text,
+                    ticket = TicketBox.Text
+                };
+                int resultado = funciones.agregar(add);
+                if (resultado > 0)
+                {
+                    MessageBox.Show("Registrado con exito!", "Registro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo registrar", "Registro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
         }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            NameBox.Text = "";
+            TicketBox.Text = "";
+        }
+
+     
+
+
     }
 }
+
