@@ -13,9 +13,11 @@ namespace Registro
 {
     public partial class Form1 : Form
     {
+        conexion combo = new conexion();
         public Form1()
         {
             InitializeComponent();
+            combo.seleccionar(cb);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -31,8 +33,8 @@ namespace Registro
                 MessageBox.Show("Faltan campos por rellenar", "Registro", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
-            {
-                user add = new user
+            {          
+                    user add = new user
                 {
                     nombre = NameBox.Text,
                     ticket = TicketBox.Text
@@ -55,9 +57,10 @@ namespace Registro
             TicketBox.Text = "";
         }
 
-     
+
+
+
 
 
     }
 }
-
